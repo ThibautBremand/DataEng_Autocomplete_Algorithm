@@ -45,3 +45,7 @@ One limit of the algorithm I implemented is that when I traverse the tree to fin
 A solution to this problem would be to use an indexing, in order to optimize the performances.  
 
 Another solution would be to alphabetically order the children list for each node of the tree. Like that, it would be faster to find the nodes for each character of the query string, using a dichotomic search / binary search, instead of a linear search. This kind of search would be inevitable for trees that contain nodes that can have thousands of children each.  
+
+## Author : Thibaut BREMAND  
+- thibaut.bremand [at] gmail.com
+- https://github.com/ThibautBremand

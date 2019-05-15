@@ -50,7 +50,7 @@ A solution would be to alphabetically order the children list for each node of t
 
 | Binary Search (Average, in nanoseconds) | Linear Search (Average, in nanoseconds) |
 |-----------------------------------------|-----------------------------------------|
-| 285,100                                 | 60,565,560                              |
+| 304,860                                 | 60,565,560                              |
 
 As expected, the binary search method is way faster.  
 

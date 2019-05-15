@@ -40,11 +40,19 @@ This approach would instantiate a lot of dictionaries, and in my opinion it coul
 - This is easily maintainable, we have full control of the nodes and tree structures, as they are represented by specific Java classes. Also, this approach is fast to understand and to visually represent.  
 - It uses a structure that looks like the chained list, which is a well-known structure, as each tree node is chained to its children.  
 
-One limit of the algorithm I implemented is that when I traverse the tree to find the corresponding nodes of the user's query, I loop through all children each time, which is a linear search. This kind of search is still good in this case because the number of nodes each time cannot exceed 26.  
+One limit of the algorithm I implemented is that when I traverse the tree to find the corresponding nodes of the user's query, I loop through all children each time, which is a linear search. This kind of search is still good in this case because the number of nodes each time cannot exceed 26.   
 
-A solution to this problem would be to use an indexing, in order to optimize the performances.  
+A solution would be to alphabetically order the children list for each node of the tree. Like that, it would be faster to find the nodes for each character of the query string, using a dichotomic search / binary search, instead of a linear search. This kind of search would be inevitable for trees that contain nodes that can have thousands of children each. 
 
-Another solution would be to alphabetically order the children list for each node of the tree. Like that, it would be faster to find the nodes for each character of the query string, using a dichotomic search / binary search, instead of a linear search. This kind of search would be inevitable for trees that contain nodes that can have thousands of children each.  
+**Note :** I will add very soon a version of this program using a Binary Search method. The performances comparison can be found below.  
+
+## 4/ Performances comparison between Binary Search method and Linear Search  
+
+| Binary Search (Average, in nanoseconds) | Linear Search (Average, in nanoseconds) |
+|-----------------------------------------|-----------------------------------------|
+| 285,100                                 | 60,565,560                              |
+
+As expected, the binary search method is way faster.  
 
 ## Author : Thibaut BREMAND  
 - thibaut.bremand [at] gmail.com

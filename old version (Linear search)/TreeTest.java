@@ -97,6 +97,9 @@ class TreeTest {
         // Load the results list
         tree.findNodesFromInputString(tree.getFirstNode(), "", input);
 
+        // Order the results list
+        tree.orderResultsAlphabetically();
+
         return tree;
     }
 }

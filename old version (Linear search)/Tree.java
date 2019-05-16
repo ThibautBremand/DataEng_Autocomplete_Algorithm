@@ -20,20 +20,6 @@ public class Tree {
         this.firstNode = node;
         this.results =  new ArrayList<>();
     }
-    
-    /**
-     * This method will add a new word to the tree
-     * @param elt : The new word needed to be added
-     */
-	public void addWord(String elt) {
-        TreeNode currentNode = this.getFirstNode();
-        // Loop through all chars in the current keyword
-        for (int i = 0; i < elt.length(); ++i) {
-
-            // If the current char is not already in the tree as a child of the current node, we add it
-            currentNode = this.addNode(currentNode, Character.toLowerCase(elt.charAt(i)), i == elt.length() - 1);
-        }
-	}
 
     /**
      * This function will add a new node to the tree, e.g it will add a child to the current node
@@ -43,14 +29,17 @@ public class Tree {
      * @return the new created node
      */
     public TreeNode addNode(TreeNode node, char c, boolean endOfWord) {
-        // Check if the child node with the character c already exists for the current node, using a Binary Search
-        int binarySearchPos = BinarySearchWithComparator.binarySearchTreeNode(node, new TreeNode(c, null));
-        if (binarySearchPos >= 0) {
-        	return node.getChildren().get(binarySearchPos);
+        // Check if the child node with the character c already exists for the current node
+        TreeNode child = node.getChildrenByChar(c);
+
+        // The child doesn't exist in the tree yet for the current node
+        if (child == null) {
+            // Return the new created child node
+            return node.addChildren(c, endOfWord);
         }
 
-        // The child doesn't exist in the tree yet for the current node : Return the new created child node
-        return node.addChildren(c, endOfWord, -binarySearchPos-1);
+        // Return the already existing child node
+        return child;
     }
 
     /**
@@ -88,13 +77,11 @@ public class Tree {
             // Add the current character to the word string in order to build the current word as a string
             word = word + node.getCharacter();
             if (!node.getEndOfWord()) {
-            	char currentChar = input.charAt(0);
-            	
-            	// Use binary search to find in the tree the associated child, if it exists
-            	int binarySearchPos = BinarySearchWithComparator.binarySearchTreeNode(node, new TreeNode(currentChar, null));
-            	if (binarySearchPos >= 0) {
-                    // Recursive call
-                    findNodesFromInputString(node.getChildren().get(binarySearchPos), word, input.substring(1));
+                for (int i = 0; i < node.getChildren().size(); ++i) {
+                    if (node.getChildren().get(i).getCharacter() == input.charAt(0)) {
+                        // Recursive call
+                        findNodesFromInputString(node.getChildren().get(i), word, input.substring(1));
+                    }
                 }
             }
         }
@@ -103,6 +90,13 @@ public class Tree {
 /**************************************************************
  * Function used to handle the results for the user's input string
  **************************************************************/
+
+    /**
+     * This function will alphabetically sort the current results
+     */
+    public void orderResultsAlphabetically() {
+        this.results.sort(String::compareToIgnoreCase);
+    }
 
     /**
      * This function will display on the console the top current results

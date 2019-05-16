@@ -33,35 +33,81 @@ public class Main {
 
         // 1 - Load the Tree with the keywords
         Tree tree = new Tree(new TreeNode('.', false));
-
-        // Loop through all keywords
         for (String elt : KEYWORDS) {
-            TreeNode currentNode = tree.getFirstNode();
-            // Loop through all chars in the current keyword
-            for (int i = 0; i < elt.length(); ++i) {
-
-                // If the current char is not already in the tree as a child of the current node, we add it
-                currentNode = tree.addNode(currentNode, elt.charAt(i), i == elt.length() - 1);
-            }
+        	tree.addWord(elt);
         }
 
         // 2 - Read the input string from the user
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("*** WELCOME TO OUR AUTOCOMPLETE PROGRAM ***");
-        System.out.println("Please enter a string :");
+        
+        boolean quitProgram = false;
+        while (quitProgram == false) {
+        	printInstructions();
+	        
+	        String input = br.readLine().toLowerCase();
+	        switch(input) {
+	        case("1"):
+	        	// Read the input and print the autocompleted results
+	            handleChoiceFindWords(tree, br);
+	        	break;
+	        case("2"):
+	        	// Read the input and add the word to the referential if it does not already exist
+	        	handleChoiceAddWord(tree, br);
+	        	break;
+	        case("3"):
+	        	// Quit the program
+	        	System.out.println("Good bye !");
+	        	quitProgram = true;
+	        	break;
+	    	default:
+	    		System.out.println("Sorry I don't understand your choice... Please try again !");
+	        }
+        }
+    }
+
+	/**
+     * This method will ask the user for an input and display the corresponding autocompleted words from the referential
+     * @param tree : The referential tree containing all the words
+     * @param br : The buffered reader used to ask the user enter an input string
+     * @throws IOException
+     */
+	private static void handleChoiceFindWords(Tree tree, BufferedReader br) throws IOException {
+    	System.out.println("Please enter a string :");
         String input = br.readLine().toLowerCase();
 
-        // 3 - Print the autocompleted results
         // Clear the results list
         tree.setResults(new ArrayList<String>());
 
         // Load the results list
         tree.findNodesFromInputString(tree.getFirstNode(), "", input);
 
-        // Order the results list
-        tree.orderResultsAlphabetically();
-
         // Display the top results on the console
         tree.displayTopResults(MAX_RESULTS);
+	}
+	
+	/**
+	 * This method will ask the user to enter a new word, and add this new word to the referential, if it does not already exist
+	 * @param tree
+	 * @param br
+	 * @throws IOException
+	 */
+    private static void handleChoiceAddWord(Tree tree, BufferedReader br) throws IOException {
+    	System.out.println("Please enter the word you want to add to the referential :");
+    	String input = br.readLine().toLowerCase();
+    	tree.addWord(input);
+	}
+
+	/**
+	 * This method will print the instructions on the console
+	 */
+	public static void printInstructions() {
+    	System.out.println("");
+        System.out.println("What do you want to do ?");
+        System.out.println("1 - Find words in the referential using an input string");
+        System.out.println("2 - Add a new word to the referential");
+        System.out.println("3 - Quit the program");
+        System.out.println("*** Please enter the number corresponding to your choice ***");
+        System.out.println("");
     }
 }

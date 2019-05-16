@@ -13,7 +13,7 @@ Each tree node contains :
 - a list of children nodes, which will contain the following possible characters for each word from the words referential. These nodes are stored alphabetically sorted.    
 - a Boolean indicating if the node is the last node of a word, e.g the list of children is empty and the character for this node is the last character of a word (this kind of node can be called "leaf").  
   
-This program is partitioned into two object classes (Tree and TreeNode), a main class and a JUnit 5 test file. A specific static class, BinarySearchWithComparator, will perform the binary searches based on the BinarySearch class from Java/Collection.     
+This program is partitioned into two object classes (Tree and TreeNode), a main class and a JUnit 5 test file. ALso, a specific static class, BinarySearchWithComparator, will perform the binary searches based on the BinarySearch class from Java.util.Collections.  
   
 ### 2-2/ Algorithm  
 **Main**  
@@ -40,7 +40,7 @@ This approach would instantiate a lot of dictionaries, and in my opinion it coul
 - This is easily maintainable, we have full control of the nodes and tree structures, as they are represented by specific Java classes. Also, this approach is fast to understand and to visually represent.  
 - It uses a structure that looks like the chained list, which is a well-known structure, as each tree node is chained to its children.  
 
-Two versions of the program are available in this repo : a version with a Linear Search O(N) -in the "old version" folder, and the main version with a Binary Search O(Log(N)). I've performed performances comparison between both programs, that you can find below :    
+Two versions of the program are available in this repo : a version with a Linear Search O(N) -in the "old version" folder, and the main version with a Binary Search O(Log(N)). I've performed performances comparison between both programs, that you can find below.   
 
 ## 4/ Performances comparison between Binary Search method and Linear Search  
 

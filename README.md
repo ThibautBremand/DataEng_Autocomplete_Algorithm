@@ -32,15 +32,17 @@ Some other other approaches could have been possible :
 *a/ Naive approach* : Build a simple list of all words, and iterate the list of words in order to find the results words that start with the user's input.    
 This approach is very slow and not scalable. The more words we have in the list, the slower the approach will be.    
   
-*b/ Indexing using dictionaries / hash maps* : Just like the way we look for a word in a paper dictionary, we would store each word into a dictionary of dictionaries. The first dictionary would use the first character of a word as the key, and store other dictionaries for the other characters until we constitute a word. To find a word, we would compare the dictionaries' keys for each character of the word.    
-This approach would instantiate a lot of dictionaries, and in my opinion it could take a lot of memory and could be hard to maintain (dictionaries manipulation, and lack of control of the structure of the dictionary). Also, Trees are better to work with ordered data.    
+*b/ Indexing using dictionaries / hash maps* : Just like the way we look for a word in a paper dictionary, we would store the words into a dictionary, using characters as keys. This approach less interesting than the Tree in a big data context :  
+- Trees support ordering.  
+- Trees can be modified concurrently, by locking single nodes. Hash tables need to be locked as a whole to ensure consistent values.  
+- If one day we want to retrieve all the words which the first character is greater than, let's say "G", it will be way faster with a Tree (log n) than with a hash table.       
   
-*c/ Tree of chained TreeNodes* : This is the approach I used for this program.   
+*c/ Tree of chained nodes* : This is the approach I used for this program.   
 - This approach is very scalable : if we have a lot of words, we just have to add nodes to the tree, reusing some nodes. For example, if we want to add the word **Board** and we already have the word **Boy** in the tree, we will reuse the nodes **B** and **O**, and add the nodes **A**, **R**, and **D** after the O in the tree.    
-- This is easily maintainable, we have full control of the nodes and tree structures, as they are represented by specific Java classes. Also, this approach is fast to understand and to visually represent.  
-- It uses a structure that looks like the chained list, which is a well-known structure, as each tree node is chained to its children.  
+- This is easily maintainable, we have full control of the nodes and tree structures, as they are represented by specific Java classes.   
+- This data structure is fast to understand and to visually represent. It uses a structure that looks like chained lists, as each tree node is chained to its children.  
 
-Two versions of the program are available in this repo : a version with a Linear Search O(N) -in the "old version" folder, and the main version with a Binary Search O(Log(N)). I've performed performances comparison between both programs, that you can find below.   
+Two versions of the program are available in this repo : a version with a Linear Search O(n) -in the "old version" folder, and the main version with a Binary Search O(log n). I've performed performances comparison between both programs, that you can find below.   
 
 ## 4/ Performances comparison between Binary Search method and Linear Search  
 

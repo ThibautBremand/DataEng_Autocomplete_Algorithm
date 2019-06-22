@@ -1,5 +1,5 @@
 
-# Autocomplete program in Java  
+# Autocomplete program in Java (Python script added since then) 
   
 ## 1/ Introduction  
 This program written in Java will display autocompleted results based on a user query input string.    
